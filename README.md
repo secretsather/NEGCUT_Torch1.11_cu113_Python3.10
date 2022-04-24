@@ -5,7 +5,7 @@
 <img src='imgs/framework.png' align="left">  
 
 <br><br><br>
-
+-DEFAULT NUM_THREADS CHANGED TO 0 IN THIS FORK DUE TO ISSUES WITH VISDOM
 
 We provide our PyTorch implementation of [Instance-wise Hard Negative Example Generation for Contrastive Learning in Unpaired Image-to-Image Translation](https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_Instance-Wise_Hard_Negative_Example_Generation_for_Contrastive_Learning_in_Unpaired_ICCV_2021_paper.pdf) (NEGCUT). 
 In the paper, we identify that the negative examples play a critical role in the performance of contrastive learning for image-to-image translation.
