@@ -95,9 +95,9 @@ def save_image(image_numpy, image_path, aspect_ratio=1.0):
     if aspect_ratio is None:
         pass
     elif aspect_ratio > 1.0:
-        image_pil = image_pil.resize((h, int(w * aspect_ratio)), Image.BICUBIC)
+        image_pil = image_pil.resize((h, int(w * aspect_ratio)), torchvision.transforms.InterpolationMode.BICUBIC)
     elif aspect_ratio < 1.0:
-        image_pil = image_pil.resize((int(h / aspect_ratio), w), Image.BICUBIC)
+        image_pil = image_pil.resize((int(h / aspect_ratio), w), torchvision.transforms.InterpolationMode.BICUBIC)
     image_pil.save(image_path)
 
 
@@ -154,13 +154,13 @@ def correct_resize_label(t, size):
     return torch.stack(resized, dim=0).to(device)
 
 
-def correct_resize(t, size, mode=Image.BICUBIC):
+def correct_resize(t, size, mode=torchvision.transforms.InterpolationMode.BICUBIC):
     device = t.device
     t = t.detach().cpu()
     resized = []
     for i in range(t.size(0)):
         one_t = t[i:i + 1]
-        one_image = Image.fromarray(tensor2im(one_t)).resize(size, Image.BICUBIC)
+        one_image = Image.fromarray(tensor2im(one_t)).resize(size, torchvision.transforms.InterpolationMode.BICUBIC)
         resized_t = torchvision.transforms.functional.to_tensor(one_image) * 2 - 1.0
         resized.append(resized_t)
     return torch.stack(resized, dim=0).to(device)
