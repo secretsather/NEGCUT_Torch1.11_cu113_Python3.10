@@ -14,7 +14,8 @@ def accumulate(model1, model2, decay=0.9):
     par2 = dict(model2.named_parameters())
 
     for k in par1.keys():
-        par1[k].data.mul_(decay).add_(1 - decay, par2[k].data)
+        par1[k].data.mul_(decay).add_(par2[k].data, alpha=1 - decay)
+        #par1[k].data.mul_(decay).add_(1 - decay, par2[k].data)
 
 
 class NEGCUTModel(BaseModel):
